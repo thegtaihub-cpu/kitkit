@@ -1,27 +1,43 @@
 <?php
-// Database configuration
+// Database configuration for KITKIT Shopping
 $host = 'localhost';
-$dbname = 'quickcart_pro';
+$dbname = 'kitkit_shopping';
 $username = 'root';
 $password = '';
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch(PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
 
-// Function to get all products
-function getProducts($pdo, $limit = null) {
-    $sql = "SELECT * FROM products WHERE status = 'active' ORDER BY created_at DESC";
+// Function to get all products with search
+function getProducts($pdo, $search = '', $category = '', $limit = null) {
+    $sql = "SELECT * FROM products WHERE status = 'active'";
+    $params = [];
+    
+    if (!empty($search)) {
+        $sql .= " AND (name LIKE ? OR description LIKE ?)";
+        $searchTerm = "%$search%";
+        $params[] = $searchTerm;
+        $params[] = $searchTerm;
+    }
+    
+    if (!empty($category)) {
+        $sql .= " AND category = ?";
+        $params[] = $category;
+    }
+    
+    $sql .= " ORDER BY created_at DESC";
+    
     if ($limit) {
         $sql .= " LIMIT " . (int)$limit;
     }
     
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    $stmt->execute($params);
     return $stmt->fetchAll();
 }
 
@@ -44,11 +60,10 @@ function getProductsByCategory($pdo, $category, $limit = null) {
     return $stmt->fetchAll();
 }
 
-// Function to search products
-function searchProducts($pdo, $query) {
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE (name LIKE ? OR description LIKE ?) AND status = 'active' ORDER BY name ASC");
-    $searchTerm = "%$query%";
-    $stmt->execute([$searchTerm, $searchTerm]);
+// Function to get all categories
+function getCategories($pdo) {
+    $stmt = $pdo->prepare("SELECT * FROM categories WHERE status = 'active' ORDER BY name ASC");
+    $stmt->execute();
     return $stmt->fetchAll();
 }
 
@@ -126,5 +141,56 @@ function getCartTotal($pdo) {
 function clearCart() {
     $_SESSION['cart'] = [];
     return true;
+}
+
+// Function to get user by email
+function getUserByEmail($pdo, $email) {
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? AND status = 'active'");
+    $stmt->execute([$email]);
+    return $stmt->fetch();
+}
+
+// Function to create user
+function createUser($pdo, $userData) {
+    $stmt = $pdo->prepare("INSERT INTO users (name, email, mobile, address, pincode, city, state, password_hash, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+    return $stmt->execute([
+        $userData['name'],
+        $userData['email'],
+        $userData['mobile'],
+        $userData['address'],
+        $userData['pincode'],
+        $userData['city'],
+        $userData['state'],
+        password_hash($userData['password'], PASSWORD_DEFAULT)
+    ]);
+}
+
+// Function to verify user login
+function verifyUser($pdo, $email, $password) {
+    $user = getUserByEmail($pdo, $email);
+    if ($user && password_verify($password, $user['password_hash'])) {
+        return $user;
+    }
+    return false;
+}
+
+// Function to add to wishlist
+function addToWishlist($pdo, $userId, $productId) {
+    $stmt = $pdo->prepare("INSERT IGNORE INTO wishlist (user_id, product_id, created_at) VALUES (?, ?, NOW())");
+    return $stmt->execute([$userId, $productId]);
+}
+
+// Function to get user wishlist
+function getUserWishlist($pdo, $userId) {
+    $stmt = $pdo->prepare("SELECT p.* FROM products p JOIN wishlist w ON p.id = w.product_id WHERE w.user_id = ? AND p.status = 'active' ORDER BY w.created_at DESC");
+    $stmt->execute([$userId]);
+    return $stmt->fetchAll();
+}
+
+// Function to get Indian cities with pincodes
+function getIndianCities($pdo) {
+    $stmt = $pdo->prepare("SELECT * FROM indian_cities ORDER BY city_name ASC");
+    $stmt->execute();
+    return $stmt->fetchAll();
 }
 ?>
