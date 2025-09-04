@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart & Checkout - QuickCart Pro</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fquickcart6643back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background">
+    <!-- Header Navigation -->
+    <header class="bg-white shadow-soft sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="homepage.html" class="flex items-center space-x-2">
+                        <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
+                            <path d="M9 8V17H11V8H9ZM13 8V17H15V8H13Z"/>
+                        </svg>
+                        <span class="text-xl font-bold text-primary">QuickCart Pro</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="homepage.html" class="text-neutral-600 hover:text-primary transition-colors">Home</a>
+                    <a href="product_categories.html" class="text-neutral-600 hover:text-primary transition-colors">Categories</a>
+                    <a href="order_tracking.html" class="text-neutral-600 hover:text-primary transition-colors">Track Orders</a>
+                    <a href="user_profile_dashboard.html" class="text-neutral-600 hover:text-primary transition-colors">Account</a>
+                </nav>
+
+                <!-- Cart and User Actions -->
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-primary font-medium">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9"/>
+                        </svg>
+                        <span class="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </button>
+                    <span class="text-primary font-medium">Cart</span>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 text-neutral-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Location Banner -->
+    <div class="bg-primary-50 border-b border-primary-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+            <div class="flex items-center justify-center space-x-2 text-sm">
+                <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                <span class="text-primary-700">Delivering to: <strong>Downtown Seattle, WA 98101</strong></span>
+                <button class="text-primary-600 hover:text-primary-700 underline">Change</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+            <a href="homepage.html" class="hover:text-primary transition-colors">Home</a>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+            <span class="text-primary font-medium">Shopping Cart</span>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Cart Items Section -->
+            <div class="lg:col-span-2">
+                <!-- Cart Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <h1 class="text-3xl font-bold text-primary">Shopping Cart</h1>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-neutral-600">3 items</span>
+                        <button class="text-accent hover:text-accent-600 font-medium">Clear Cart</button>
+                    </div>
+                </div>
+
+                <!-- Delivery Time Banner -->
+                <div class="bg-success-50 border border-success-200 rounded-lg p-4 mb-6">
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-6 h-6 text-success" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <div>
+                            <p class="font-semibold text-success-700">Great! Your order qualifies for 30-minute delivery</p>
+                            <p class="text-success-600 text-sm">Add $15 more for free express delivery</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cart Items -->
+                <div class="space-y-4">
+                    <!-- Cart Item 1 -->
+                    <div class="card">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-20 h-20 overflow-hidden rounded-lg">
+                                <img src="https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1" alt="Organic Bananas" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-lg">Organic Bananas</h3>
+                                <p class="text-neutral-500 text-sm">Fresh • 1 lb bunch</p>
+                                <div class="flex items-center space-x-2 mt-1">
+                                    <span class="text-success text-sm font-medium">✓ In Stock</span>
+                                    <span class="text-neutral-400">•</span>
+                                    <button class="text-primary text-sm hover:underline">Substitution preferences</button>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <!-- Quantity Controls -->
+                                <div class="flex items-center border border-neutral-300 rounded-lg">
+                                    <button class="p-2 hover:bg-neutral-100 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                        </svg>
+                                    </button>
+                                    <span class="px-4 py-2 font-medium">2</span>
+                                    <button class="p-2 hover:bg-neutral-100 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <!-- Price -->
+                                <div class="text-right">
+                                    <p class="font-bold text-lg text-primary">$5.98</p>
+                                    <p class="text-neutral-500 text-sm">$2.99 each</p>
+                                </div>
+                                <!-- Remove Button -->
+                                <button class="p-2 text-neutral-400 hover:text-accent transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Item 2 -->
+                    <div class="card">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-20 h-20 overflow-hidden rounded-lg">
+                                <img src="https://images.pixabay.com/photo/2016/08/11/08/04/bread-1585602_1280.jpg" alt="Whole Grain Bread" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-lg">Whole Grain Bread</h3>
+                                <p class="text-neutral-500 text-sm">Artisan • 24 oz loaf</p>
+                                <div class="flex items-center space-x-2 mt-1">
+                                    <span class="text-warning text-sm font-medium">⚠ Low Stock (2 left)</span>
+                                    <span class="text-neutral-400">•</span>
+                                    <button class="text-primary text-sm hover:underline">Special instructions</button>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <!-- Quantity Controls -->
+                                <div class="flex items-center border border-neutral-300 rounded-lg">
+                                    <button class="p-2 hover:bg-neutral-100 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                        </svg>
+                                    </button>
+                                    <span class="px-4 py-2 font-medium">1</span>
+                                    <button class="p-2 hover:bg-neutral-100 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <!-- Price -->
+                                <div class="text-right">
+                                    <p class="font-bold text-lg text-primary">$4.49</p>
+                                    <p class="text-neutral-500 text-sm">per loaf</p>
+                                </div>
+                                <!-- Remove Button -->
+                                <button class="p-2 text-neutral-400 hover:text-accent transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Item 3 -->
+                    <div class="card">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-20 h-20 overflow-hidden rounded-lg">
+                                <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Fresh Milk" class="w-full h-full object-cover" onerror="this.src='https://images.pexels.com/photos/236010/pexels-photo-236010.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1'; this.onerror=null;" />
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-lg">Fresh Milk</h3>
+                                <p class="text-neutral-500 text-sm">Organic • 1 gallon</p>
+                                <div class="flex items-center space-x-2 mt-1">
+                                    <span class="text-success text-sm font-medium">✓ In Stock</span>
+                                    <span class="text-neutral-400">•</span>
+                                    <span class="text-secondary text-sm">🥛 Keep refrigerated</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <!-- Quantity Controls -->
+                                <div class="flex items-center border border-neutral-300 rounded-lg">
+                                    <button class="p-2 hover:bg-neutral-100 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                        </svg>
+                                    </button>
+                                    <span class="px-4 py-2 font-medium">1</span>
+                                    <button class="p-2 hover:bg-neutral-100 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <!-- Price -->
+                                <div class="text-right">
+                                    <p class="font-bold text-lg text-primary">$3.79</p>
+                                    <p class="text-neutral-500 text-sm">per gallon</p>
+                                </div>
+                                <!-- Remove Button -->
+                                <button class="p-2 text-neutral-400 hover:text-accent transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggested Items -->
+                <div class="mt-8">
+                    <h3 class="text-xl font-bold text-primary mb-4">Frequently Bought Together</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <!-- Suggested Item 1 -->
+                        <div class="card card-hover cursor-pointer">
+                            <div class="aspect-square mb-3 overflow-hidden rounded-lg">
+                                <img src="https://images.pixabay.com/photo/2017/05/11/19/44/fresh-fruits-2305192_1280.jpg" alt="Mixed Berries" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            </div>
+                            <h4 class="font-semibold text-sm mb-1">Mixed Berries</h4>
+                            <p class="text-neutral-500 text-xs mb-2">12 oz pack</p>
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-primary">$6.99</span>
+                                <button class="bg-primary text-white p-1 rounded-full hover:bg-primary-600 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Suggested Item 2 -->
+                        <div class="card card-hover cursor-pointer">
+                            <div class="aspect-square mb-3 overflow-hidden rounded-lg">
+                                <img src="https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1" alt="Greek Yogurt" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1571212515416-fef01fc43637?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            </div>
+                            <h4 class="font-semibold text-sm mb-1">Greek Yogurt</h4>
+                            <p class="text-neutral-500 text-xs mb-2">32 oz container</p>
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-primary">$5.49</span>
+                                <button class="bg-primary text-white p-1 rounded-full hover:bg-primary-600 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Suggested Item 3 -->
+                        <div class="card card-hover cursor-pointer">
+                            <div class="aspect-square mb-3 overflow-hidden rounded-lg">
+                                <img src="https://images.pixabay.com/photo/2016/12/06/18/27/eggs-1887522_1280.jpg" alt="Farm Fresh Eggs" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            </div>
+                            <h4 class="font-semibold text-sm mb-1">Farm Fresh Eggs</h4>
+                            <p class="text-neutral-500 text-xs mb-2">12 count</p>
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-primary">$4.99</span>
+                                <button class="bg-primary text-white p-1 rounded-full hover:bg-primary-600 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Suggested Item 4 -->
+                        <div class="card card-hover cursor-pointer">
+                            <div class="aspect-square mb-3 overflow-hidden rounded-lg">
+                                <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Avocados" class="w-full h-full object-cover" onerror="this.src='https://images.pexels.com/photos/557659/pexels-photo-557659.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1'; this.onerror=null;" />
+                            </div>
+                            <h4 class="font-semibold text-sm mb-1">Ripe Avocados</h4>
+                            <p class="text-neutral-500 text-xs mb-2">4 pack</p>
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-primary">$3.99</span>
+                                <button class="bg-primary text-white p-1 rounded-full hover:bg-primary-600 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkout Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="sticky top-24">
+                    <!-- Order Summary -->
+                    <div class="card mb-6">
+                        <h3 class="text-xl font-bold text-primary mb-4">Order Summary</h3>
+                        
+                        <!-- Promo Code -->
+                        <div class="mb-4">
+                            <div class="flex space-x-2">
+                                <input type="text" placeholder="Promo code" class="input-field flex-1 text-sm py-2" />
+                                <button class="btn-secondary text-sm px-4">Apply</button>
+                            </div>
+                            <p class="text-success text-sm mt-2">✓ WELCOME15 applied - 15% off first order</p>
+                        </div>
+
+                        <!-- Pricing Breakdown -->
+                        <div class="space-y-3 mb-4">
+                            <div class="flex justify-between">
+                                <span class="text-neutral-600">Subtotal (3 items)</span>
+                                <span>$14.26</span>
+                            </div>
+                            <div class="flex justify-between text-success">
+                                <span>Promo discount</span>
+                                <span>-$2.14</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-neutral-600">Delivery fee</span>
+                                <span>$2.99</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-neutral-600">Service fee</span>
+                                <span>$1.50</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-neutral-600">Tax</span>
+                                <span>$1.32</span>
+                            </div>
+                            <div class="border-t pt-3">
+                                <div class="flex justify-between font-bold text-lg">
+                                    <span>Total</span>
+                                    <span class="text-primary">$17.93</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Loyalty Points -->
+                        <div class="bg-secondary-50 p-3 rounded-lg mb-4">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                                <span class="text-secondary-700 font-medium">You'll earn 18 points</span>
+                            </div>
+                            <p class="text-secondary-600 text-sm mt-1">Current balance: 245 points ($2.45 value)</p>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Options -->
+                    <div class="card mb-6">
+                        <h3 class="text-xl font-bold text-primary mb-4">Delivery Options</h3>
+                        
+                        <!-- Delivery Time Slots -->
+                        <div class="space-y-3 mb-4">
+                            <label class="flex items-center space-x-3 p-3 border border-primary-200 rounded-lg cursor-pointer bg-primary-50">
+                                <input type="radio" name="delivery" value="express" class="text-primary" checked />
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-semibold">Express (30 min)</span>
+                                        <span class="text-primary font-bold">$2.99</span>
+                                    </div>
+                                    <p class="text-sm text-neutral-600">Available now</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-center space-x-3 p-3 border border-neutral-200 rounded-lg cursor-pointer hover:bg-neutral-50">
+                                <input type="radio" name="delivery" value="standard" class="text-primary" />
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-semibold">Standard (1-2 hours)</span>
+                                        <span class="text-success font-bold">Free</span>
+                                    </div>
+                                    <p class="text-sm text-neutral-600">Next available: 2:30 PM</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-center space-x-3 p-3 border border-neutral-200 rounded-lg cursor-pointer hover:bg-neutral-50">
+                                <input type="radio" name="delivery" value="scheduled" class="text-primary" />
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-semibold">Scheduled</span>
+                                        <span class="text-success font-bold">Free</span>
+                                    </div>
+                                    <p class="text-sm text-neutral-600">Choose your time</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Delivery Address -->
+                        <div class="border-t pt-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-semibold">Delivery Address</span>
+                                <button class="text-primary text-sm hover:underline">Change</button>
+                            </div>
+                            <div class="text-sm text-neutral-600">
+                                <p>John Smith</p>
+                                <p>1234 Pine Street, Apt 5B</p>
+                                <p>Seattle, WA 98101</p>
+                            </div>
+                            <div class="mt-2">
+                                <input type="text" placeholder="Special delivery instructions..." class="input-field text-sm" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="card mb-6">
+                        <h3 class="text-xl font-bold text-primary mb-4">Payment Method</h3>
+                        
+                        <div class="space-y-3">
+                            <!-- Saved Card -->
+                            <label class="flex items-center space-x-3 p-3 border border-primary-200 rounded-lg cursor-pointer bg-primary-50">
+                                <input type="radio" name="payment" value="card1" class="text-primary" checked />
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-6 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">
+                                        VISA
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">•••• 4242</p>
+                                        <p class="text-sm text-neutral-600">Expires 12/26</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Apple Pay -->
+                            <label class="flex items-center space-x-3 p-3 border border-neutral-200 rounded-lg cursor-pointer hover:bg-neutral-50">
+                                <input type="radio" name="payment" value="applepay" class="text-primary" />
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-6 bg-black rounded text-white text-xs flex items-center justify-center">
+                                        🍎
+                                    </div>
+                                    <span class="font-semibold">Apple Pay</span>
+                                </div>
+                            </label>
+
+                            <!-- Buy Now Pay Later -->
+                            <label class="flex items-center space-x-3 p-3 border border-neutral-200 rounded-lg cursor-pointer hover:bg-neutral-50">
+                                <input type="radio" name="payment" value="bnpl" class="text-primary" />
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-6 bg-purple-600 rounded text-white text-xs flex items-center justify-center font-bold">
+                                        K
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">Klarna</p>
+                                        <p class="text-sm text-neutral-600">Pay in 4 installments</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Add New Payment -->
+                            <button class="w-full p-3 border-2 border-dashed border-neutral-300 rounded-lg text-neutral-600 hover:border-primary hover:text-primary transition-colors">
+                                + Add new payment method
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Security & Trust -->
+                    <div class="flex items-center justify-center space-x-4 mb-6 text-sm text-neutral-500">
+                        <div class="flex items-center space-x-1">
+                            <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                            </svg>
+                            <span>SSL Secured</span>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span>Money Back Guarantee</span>
+                        </div>
+                    </div>
+
+                    <!-- Checkout Buttons -->
+                    <div class="space-y-3">
+                        <button class="w-full btn-primary text-lg py-4">
+                            Place Order - $17.93
+                        </button>
+                        <button class="w-full border-2 border-neutral-300 text-neutral-700 font-semibold py-3 px-6 rounded-lg hover:bg-neutral-50 transition-colors">
+                            Continue as Guest
+                        </button>
+                    </div>
+
+                    <!-- Family Sharing -->
+                    <div class="mt-4 p-3 bg-secondary-50 rounded-lg">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.5 8H16c-.8 0-1.5.7-1.5 1.5v6c0 .8.7 1.5 1.5 1.5h1v3h2zM12.5 11.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10s.67 1.5 1.5 1.5zM5.5 6c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2zm2 16v-7H9V9c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v6h1.5v7h4zm7.5-3v-6.5c0-.83-.67-1.5-1.5-1.5h-2c-.83 0-1.5.67-1.5 1.5V19h5z"/>
+                            </svg>
+                            <span class="font-semibold text-secondary-700">Family Cart</span>
+                        </div>
+                        <p class="text-secondary-600 text-sm">Sarah added 2 items • Mike added 1 item</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-800 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
+                        </svg>
+                        <span class="text-2xl font-bold">QuickCart Pro</span>
+                    </div>
+                    <p class="text-neutral-300 mb-6 max-w-md">
+                        Your neighborhood's digital grocery companion. Quality you trust, speed you need, community you love.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="javascript:void(0)" class="text-neutral-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-neutral-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-neutral-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.097.118.112.221.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="product_categories.html" class="text-neutral-300 hover:text-white transition-colors">Browse Categories</a></li>
+                        <li><a href="order_tracking.html" class="text-neutral-300 hover:text-white transition-colors">Track Your Order</a></li>
+                        <li><a href="user_profile_dashboard.html" class="text-neutral-300 hover:text-white transition-colors">My Account</a></li>
+                        <li><a href="javascript:void(0)" class="text-neutral-300 hover:text-white transition-colors">Help Center</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Contact Us</h3>
+                    <ul class="space-y-2 text-neutral-300">
+                        <li>📞 1-800-QUICKCART</li>
+                        <li>📧 support@quickcartpro.com</li>
+                        <li>📍 Seattle, WA</li>
+                        <li>🕒 24/7 Customer Support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-neutral-700 mt-12 pt-8 text-center text-neutral-400">
+                <p>&copy; 2025 QuickCart Pro. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation (Sticky) -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 z-50">
+        <div class="flex items-center justify-around py-2">
+            <a href="homepage.html" class="flex flex-col items-center p-2 text-neutral-500">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                <span class="text-xs mt-1">Home</span>
+            </a>
+            <a href="product_categories.html" class="flex flex-col items-center p-2 text-neutral-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14-7H5m14 14H5"/>
+                </svg>
+                <span class="text-xs mt-1">Categories</span>
+            </a>
+            <a href="shopping_cart_checkout.html" class="flex flex-col items-center p-2 text-primary relative">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9"/>
+                </svg>
+                <span class="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                <span class="text-xs mt-1">Cart</span>
+            </a>
+            <a href="order_tracking.html" class="flex flex-col items-center p-2 text-neutral-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <span class="text-xs mt-1">Track</span>
+            </a>
+            <a href="user_profile_dashboard.html" class="flex flex-col items-center p-2 text-neutral-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+                <span class="text-xs mt-1">Account</span>
+            </a>
+        </div>
+    </div>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
